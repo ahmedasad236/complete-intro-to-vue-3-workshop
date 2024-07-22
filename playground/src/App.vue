@@ -1,12 +1,20 @@
 <script>
 import BaseCounter from "./components/base-counter.vue";
+import userCard from "./components/user-card.vue";
 
 export default {
   components: {
     BaseCounter,
+    userCard,
   },
   data() {
     return {
+      userData: {
+        name: "John Doe",
+        age: 25,
+        email: "john@example.com",
+        preferredFramework: "Vue",
+      },
       message: "Hello it works",
       listOfNumbers: [
         {
@@ -37,22 +45,38 @@ export default {
       ],
     };
   },
+  computed: {
+    refineUserData() {
+      return {
+        ...this.userData,
+        name: this.userData.name.toUpperCase(),
+      };
+    },
+  },
+  methods: {
+    changeUserName(newName) {
+      this.userData.name = newName;
+    },
+  },
 };
 </script>
 
 <template>
-  <BaseCounter />
-  <hr />
-  <p v-if="message.length % 2 === 0">Even: {{ message.toUpperCase() }}</p>
-  <p v-else>Odd: {{ message }}</p>
-  <ul v-for="(item, index) in listOfNumbers" :key="`item-${index}`">
-    <li>
-      {{ item.id }}
-      <ul>
-        <li v-for="(number, index) in item.list" :key="`number-${index}`">
-          {{ number }}
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <div>
+    <user-card :user="refineUserData" @change-name="changeUserName('Ahmed')" />
+    <BaseCounter />
+    <hr />
+    <p v-if="message.length % 2 === 0">Even: {{ message.toUpperCase() }}</p>
+    <p v-else>Odd: {{ message }}</p>
+    <ul v-for="(item, index) in listOfNumbers" :key="`item-${index}`">
+      <li>
+        {{ item.id }}
+        <ul>
+          <li v-for="(number, index) in item.list" :key="`number-${index}`">
+            {{ number }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </template>
