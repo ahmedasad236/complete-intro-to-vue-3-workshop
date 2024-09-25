@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Vue3 - exercise 1</title>
+  </head>
+  <body>
+    <h1>Frontend Masters - Vue Exercise 1</h1>
+    <div id="root">
+      <h3>All Characters</h3>
+      <p v-if="characters.length === 0">There is no character in our list</p>
+      <ul v-else>
+        <li v-for="character in characters">
+          {{ character.name }} - {{ character.age }}
+        </li>
+      </ul>
+      <hr />
+      <!-- <h3>Adults</h3>
+      <ul>
+        <li v-for="character in characters"></li>
+      </ul> -->
+    </div>
+    <!-- Vue cdn-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            characters: [
+              {
+                name: 'Luke Skywalker',
+                age: 25
+              },
+              {
+                name: 'Darth Vader',
+                age: 35
+              },
+              {
+                name: 'Yoda',
+                age: 22
+              },
+              {
+                name: 'Obi-Wan Kenobi',
+                age: 60
+              },
+              {
+                name: 'Leia Organa',
+                age: 15
+              }
+            ]
+          };
+        }
+      });
+
+      app.mount('#root');
+    </script>
+  </body>
+</html>
