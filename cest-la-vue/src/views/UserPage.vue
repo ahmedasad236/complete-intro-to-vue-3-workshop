@@ -27,11 +27,13 @@ userList.value = await fetchUsers();
   <main>
     <h1>{{ title }}</h1>
     <ul>
-      <UserCard
+      <router-link
         v-for="user in userList"
-        :user="user"
         :key="`user-${user.id}`"
-      />
+        :to="`/user-detailed/${user.name}`"
+      >
+        <UserCard :user="user" />
+      </router-link>
     </ul>
   </main>
 </template>
